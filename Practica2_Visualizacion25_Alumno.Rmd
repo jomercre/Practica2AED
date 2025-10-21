@@ -435,11 +435,27 @@ El fichero ``iceRiver.RData`` contiene información del caudal de dos ríos isla
 
   * Representa el caudal de ambos ríos a lo largo del período considerado coloreando una serie (`flow.vat`) en color rojo y la otra en color azul. 
   * Utiliza la función `labs` para enriquecer el gráfico.
-  * Almacena en formato **pdf** el gráfico resultante en un fichero denominado ``Ejercicio5.pdf``.
+  * Almacena en formato **pdf** el gráfico resultante en un fichero denominado ``Ejercicio6.pdf``.
 
 ```{r Solucion ejercicio 6 }
+rm(list=ls())
+load('data/iceRiver.RData')
+
+str(ice.river.df)
+
+fig1 <- ggplot(ice.river.df, aes(x=time)) + geom_line(color='Red', aes(y = flow.vat)) + geom_line(color='Blue',aes(y = flow.jok))
+
+print(fig1)
+
+fig2 <- ggplot(ice.river.df, aes(x=time)) + geom_line(color='Red', aes(y = flow.vat)) + geom_line(color='Blue',aes(y = flow.jok)) + labs(
+    title = 'Caudales de los ríos islandeses Vatnsdalsa (azul) y Jokulsa Eystri (rojo)',
+    x ='T (y)',
+    y = 'Caudal (m^3/s)')
+
+print(fig2)
 
 
+ggsave('figs/Ejercicio6.pdf')
 ```
 
 
