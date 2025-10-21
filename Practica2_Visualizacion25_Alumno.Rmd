@@ -340,7 +340,30 @@ ggplot(data=Dosis.Medicina2, aes(x=Dosis, y=Efectividad, group=Complemento)) +
 * Almacena en formato **pdf** el gráfico resultante en un fichero denominado ``Ejercicio4.pdf``.
 
 ```{r Solucion ejercicio 4}
+rm(list=ls())
+load('data/Ejercicio4_Data.Rdata')
 
+str(DatosEjer4)
+
+fig1 <- ggplot(DatosEjer4, aes(x = Fecha, y = Ventas)) + geom_point(aes(color=Fabricante))
+
+print(fig1)
+```
+Para observar ventas es mucho mejor utilizar un gráfico de rectas.
+```{r}
+fig2 <- ggplot(DatosEjer4, aes(x = Fecha, y = Ventas)) + geom_point(aes(color=Fabricante)) + geom_line(aes(color=Fabricante))
+
+print(fig2)
+
+fig3 <- ggplot(DatosEjer4, aes(x = Fecha, y = Ventas)) + geom_point(aes(color=Fabricante)) + geom_line(aes(linetype=Fabricante, color=Fabricante))
+
+print(fig3)
+
+fig4 <- ggplot(DatosEjer4, aes(x = Fecha, y = Ventas)) + geom_point(aes(color=Fabricante)) + geom_line(aes(linetype=Fabricante, color=Fabricante)) + labs(title='Ventas mensuales de diferentes compañías tecnológicas')
+
+print(fig4)
+
+ggsave('figs/Ejercicio4.pdf')
 ```
 
 ## Barras de error con **ggplot2**
