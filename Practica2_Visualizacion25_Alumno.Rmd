@@ -157,6 +157,19 @@ p2
 * Almacena en formato **pdf** el gráfico resultante en un fichero denominado ``Ejercicio1.pdf``.
 
 ```{r Solucion ejercicio 1}
+rm(list=ls())
+load('data/weatherAUS.RData')
+grafico1<-ggplot(ds, aes(x = MinTemp, y = MaxTemp))+geom_point()
+
+print(grafico1)
+
+grafico2<-ggplot(ds, aes(x = MinTemp, y = MaxTemp))+geom_point(aes(color=RainTomorrow))
+
+print(grafico2)
+
+grafico3<-ggplot(ds, aes(x = MinTemp, y = MaxTemp))+geom_point(aes(color=RainTomorrow)) + ggtitle('Relación entre temperaturas máxima y mínima y probabilidad de lluvia')
+
+print(grafico3)
 
 ggsave('figs/Ejercicio1.pdf')
 ```
