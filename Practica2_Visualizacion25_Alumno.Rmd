@@ -203,15 +203,15 @@ print(grafico3)
 ```
 Se observa mejor con los colores así que procedemos a modificar ese gráfico añadiendo título, subtítulo, leyenda y ejes adecuados.
 ```{r}
-grafico2<-ggplot(ds, aes(x = Temp9am, y = Pressure9am)) + geom_point(aes(color=RainToday))+ labs(
+grafico4<-ggplot(ds, aes(x = Temp9am, y = Pressure9am)) + geom_point(aes(color=RainToday))+ labs(
     title = 'Presión frente a temperatura',
     subtitle = 'Análisis de la relación variables climáticas P y T para las 9am del dataset ds',
     x ='P (mbar)',
     y = 'T (ºC)')
 
-print(grafico2)
+print(grafico4)
 
-ggsave('figs/Ejercicio2.pdf')
+ggsave('figs/Ejercicio4.pdf')
 ```
 
 
