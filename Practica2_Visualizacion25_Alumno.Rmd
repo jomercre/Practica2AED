@@ -472,7 +472,30 @@ En esta sección vamos a utilizar **ggplot2** para representar distribuciones de
 * Almacena en formato **pdf** el gráfico resultante en un fichero denominado ``Ejercicio7.pdf``.
 
 ```{r Solucion ejercicio 7}
+rm(list=ls())
+load('data/weatherAUS_distributions.RData')
 
+fig1 <- ggplot(ds, aes(x=Year,y=MinTemp)) + geom_boxplot()
+
+print(fig1)
+
+fig2 <- ggplot(ds, aes(x=Year,y=MaxTemp)) + geom_violin(aes(fill=Year)) + labs(
+    title = 'Distribución de temperaturas máximas por año',
+    x ='Año',
+    y = 'Temperatura (ºC)')
+
+print(fig2)
+
+fig3 <- ggplot(ds, aes(x=Year,y=MaxTemp)) + geom_violin(aes(fill=Year)) + labs(
+    title = 'Distribución de temperaturas máximas por año',
+    x ='Año',
+    y = 'Temperatura (ºC)')+theme(axis.text.x = element_text(
+      angle = 45,hjust = 1,vjust = 1),legend.position = "none")
+
+print(fig3)
+
+
+ggsave('figs/Ejercicio7.pdf')
 ```
 
 ## Histogramas con **ggplot2**
@@ -565,7 +588,7 @@ ggplot(data=dataset_hist1, aes(x=AGE)) +
 
 ### **Ejercicio 8**
 
-* Descarga de la url  "http://assets.datacamp.com/blog_assets/chol.txt" el dataset de Datacamp que utilizarás para este ejercicio y cárgalo en un datafrae .
+* Descarga de la url  "http://assets.datacamp.com/blog_assets/chol.txt" el dataset de Datacamp que utilizarás para este ejercicio y cárgalo en un dataframe .
 * Representa el histograma de la variable ``HEIGHT`` del dataframe cargado del fichero anterior.
 * Añade título ("Histograma de la variable Altura"), una etiqueta en el eje $x$ ("Altura (cm)") y una etiqueta en el eje $y$ ("Frecuencia").
 * Ajusta el rango de representación entre 155 y 195, además fuerza que el histograma tenga 20 *bins*.(usa parámetro `breaks`)
