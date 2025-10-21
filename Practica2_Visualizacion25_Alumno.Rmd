@@ -597,9 +597,80 @@ ggplot(data=dataset_hist1, aes(x=AGE)) +
 * Representa el mismo histograma del apartado anterior para cada valor de la variable ``MORT``, recuerda utilizar la función **facet_grid()**.
 * Almacena en formato **pdf** el gráfico resultante en un fichero denominado ``Ejercicio8.pdf``.
 
-```{r Solucion ejercicio 8}
-# 
+Cargamos readr para importar el txt.
+```{r}
+pacman::p_load(radr)
+```
 
+```{r Solucion ejercicio 8}
+cholFile <- read_table("data/chol.txt")
+
+fig1 <- ggplot(cholFile, aes(x=HEIGHT)) +
+  geom_histogram()
+
+print(fig1)
+
+fig2 <- ggplot(cholFile, aes(x=HEIGHT)) +
+  geom_histogram(aes(y = after_stat(density))) + labs(
+    title='Histograma de la variable Altura',
+    x='Altura (cm)',
+    y='Frecuencia'
+  )
+
+print(fig2)
+
+fig3 <- ggplot(cholFile, aes(x=HEIGHT)) +
+  geom_histogram(breaks=seq(155, 195, by=2), aes(y = after_stat(density))) + labs(
+    title='Histograma de la variable Altura',
+    x='Altura (cm)',
+    y='Frecuencia'
+  )
+
+print(fig3)
+
+fig4 <- ggplot(cholFile, aes(x=HEIGHT)) +
+  geom_histogram(breaks=seq(155, 195, by=2),
+                 col="red",
+                 fill="blue",
+                 alpha = .5, aes(y = after_stat(density))) +
+  labs(
+    title='Histograma de la variable Altura',
+    x='Altura (cm)',
+    y='Frecuencia'
+  )
+
+print(fig4)
+
+fig5 <- ggplot(cholFile, aes(x=HEIGHT)) +
+  geom_histogram(breaks=seq(155, 195, by=2),
+                 col="red",
+                 fill="blue",
+                 alpha = .5, aes(y = after_stat(density))) +
+  labs(
+    title='Histograma de la variable Altura',
+    x='Altura (cm)',
+    y='Frecuencia'
+  ) +
+  geom_density(col="green")
+
+print(fig5)
+
+fig6 <- ggplot(cholFile, aes(x=HEIGHT)) +
+  geom_histogram(breaks=seq(155, 195, by=2),
+                 col="red",
+                 fill="blue",
+                 alpha = .5, aes(y = after_stat(density))) +
+  labs(
+    title='Histograma de la variable Altura',
+    x='Altura (cm)',
+    y='Frecuencia'
+  ) +
+  geom_density(col="green") + 
+  facet_grid(.~MORT)
+
+print(fig6)
+
+ggsave('figs/Ejercicio8.pdf')
 ```
 
 ## Gráficos de barras con **ggplot2**
