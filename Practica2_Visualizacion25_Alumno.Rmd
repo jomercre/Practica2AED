@@ -203,7 +203,7 @@ print(grafico3)
 ```
 Se observa mejor con los colores así que procedemos a modificar ese gráfico añadiendo título, subtítulo, leyenda y ejes adecuados.
 ```{r}
-grafico4<-ggplot(ds, aes(x = Temp9am, y = Pressure9am)) + geom_point(aes(color=RainToday))+ labs(
+grafico4<-ggplot(ds, aes(x = Temp9am, y = Pressure9am)) + geom_point(aes(color=RainToday)) + labs(
     title = 'Presión frente a temperatura',
     subtitle = 'Análisis de la relación variables climáticas P y T para las 9am del dataset ds',
     x ='P (mbar)',
@@ -211,7 +211,7 @@ grafico4<-ggplot(ds, aes(x = Temp9am, y = Pressure9am)) + geom_point(aes(color=R
 
 print(grafico4)
 
-ggsave('figs/Ejercicio4.pdf')
+ggsave('figs/Ejercicio2.pdf')
 ```
 
 
@@ -229,8 +229,36 @@ ggsave('figs/Ejercicio4.pdf')
 * Almacena en formato **pdf** el gráfico resultante en un fichero denominado ``Ejercicio3.pdf``.
 
 ```{r Solucion ejercicio 3}
+rm(list=ls())
+load('data/iris_tidy.Rdata')
 
-ggsave('figs/Ejercicio3.pdf') # se almacena el último gráfico generado
+str(iris.tidy)
+
+iris.grafico1 <- ggplot(iris.tidy, aes(x = Species, y = Value)) + geom_point()
+
+print(iris.grafico1)
+
+iris.grafico2 <- ggplot(iris.tidy, aes(x = Species, y = Value)) + geom_point(aes(color=Part))
+
+print(iris.grafico2)
+
+iris.grafico3 <- ggplot(iris.tidy, aes(x = Species, y = Value)) + geom_point(aes(color=Part)) + facet_grid(. ~ Measure)
+
+print(iris.grafico3)
+
+iris.grafico4 <- ggplot(iris.tidy, aes(x = Species, y = Value)) + geom_point(aes(color=Part)) + facet_grid(Measure ~ .)
+
+print(iris.grafico4)
+
+ggsave('figs/Ejercicio3.pdf')
+```
+Los gráficos se comparan mejor el ponerlos en columnas distintas, es decir, al ponerlos en una misma fila, así que proseguimos con ese gráfico.
+```{r}
+iris.grafico5 <- ggplot(iris.tidy, aes(x = Species, y = Value)) + geom_jitter(aes(color=Part)) + facet_grid(Measure ~ .)
+
+print(iris.grafico5)
+
+ggsave('figs/Ejercicio3.pdf')
 ```
 
 ## Gráficos de línea con **ggplot2**
